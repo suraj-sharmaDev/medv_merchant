@@ -1,19 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Document</title>
-	<link rel="stylesheet" href="css/openOrders.css" />
-	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
-	<script type="text/javascript" src="scripts/localstorage.js"></script>
-	<script type="text/javascript">
-		const _localStorage = new localstorage();
-	</script>		
+<?php include('_includes/header.html'); ?>
+	<style type="text/css">
+	.orders-row {
+	    cursor: pointer;
+	}
+
+	.orders-row:hover {
+	    cursor: pointer;
+	    background-color : blue;
+	}	
+	</style>
 </head>
 <body>
-	<div>
-		<a href="profile.html">Profile</a>
-	</div>	
+	<?php include('_includes/navbar.php'); ?>
 	<div class="row">
 		<div class="col" id="info-div">
 			<!-- contains the merchant info -->

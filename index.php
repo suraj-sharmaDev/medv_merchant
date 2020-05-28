@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Medv</title>
-	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
-	<script type="text/javascript" src="scripts/localstorage.js"></script>
-	<script type="text/javascript">
-		const _localStorage = new localstorage();
-	</script>
+<?php include('_includes/header.html'); ?>
 </head>
 <body>
 	<div class="d-flex flex-column">
@@ -20,6 +11,12 @@
 	</div>	
 </body>
 <script type="text/javascript">
+	//check if the merchant is already loggedIn
+	function initializer(){
+		if(_localStorage.merchId!=null){
+			window.location.href = "profile.php";
+		}
+	}
 	function validator(prop){
 		if(typeof prop == 'object'){
 			if(prop.keyCode == 13){
@@ -37,10 +34,13 @@
 		if(_localStorage.merchId){
 			console.log('submitting')
 			//set page redirect link
-			window.location.href = "profile.html";
+			window.location.href = "profile.php";
 		}else{
 			alert('Set your merchant Id')
 		}
 	}
+
+	//Startup script
+	initializer();
 </script>
 </html>

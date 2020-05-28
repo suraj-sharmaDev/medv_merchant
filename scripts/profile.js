@@ -3,7 +3,7 @@ import {viewProfile} from './ajax.js';
 var infoDiv = document.getElementById('info-div');
 
 if(_localStorage.merchId == null){
-	window.location.href = "index.html";
+	window.location.href = "index.php";
 }else{
 	viewProfile(_localStorage.merchId)
 	.then((res)=>{
@@ -21,6 +21,7 @@ if(_localStorage.merchId == null){
 	})
 	.catch((err)=>{
 		alert('Your merchant Id is wrong! \n Please fix it.');
-		window.location.href = "index.html";		
+		_localStorage.removeMerchant();
+		window.location.href = "index.php";		
 	})
 }

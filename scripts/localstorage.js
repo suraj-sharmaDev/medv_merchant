@@ -7,7 +7,7 @@ class localstorage {
 		if(!localStorage.getItem('merchId')){
 			localStorage.setItem('merchId', null);
 		}else{
-			data = localStorage.getItem('merchId');
+			data = localStorage.getItem('merchId') == "null" ? null : localStorage.getItem('merchId');
 		}
 		return data;
 	}
@@ -18,6 +18,6 @@ class localstorage {
 
 	removeMerchant(){
 		this.merchId = null;
-		localStorage.clear();
+		localStorage.setItem('merchId', null);
 	}
 }

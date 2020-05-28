@@ -25,7 +25,7 @@ window.getOrderDetails = function (orderId){
 
 // main function call
 if(_localStorage.merchId == null){
-	window.location.href = "index.html";
+	window.location.href = "index.php";
 }else{
 	openOrders(5)
 	.then((res)=>{
@@ -33,18 +33,18 @@ if(_localStorage.merchId == null){
 		//check the size of array res
 		var count = Object.keys(res).length; 
 		if(count > 0){
-			var mainDiv = '';
+			var mainDiv = '<table class="table table-dark" border = "1">';
+			mainDiv += '<thead>';
+			mainDiv += '<tr><td>Order Id</td><td>Customer Name</td><td>Order Comments</td></tr>';
+			mainDiv += '</thead><tbody>';						
 			for(let i = 0; i < count; i++){
 				let obj = res[i];
-				mainDiv += '<div class="mainDiv" onclick="getOrderDetails('+ obj.Order_Id+')">';
+				mainDiv += '<tr class="orders-row" onclick="getOrderDetails('+ obj.Order_Id+')">';
 				let appendBlock = '';
-				appendBlock += "<div class='appendBlock'>";
-				appendBlock += `<p>Order Id : ${obj.Order_Id}</p>`;			
-				appendBlock += `<p>First Name : ${obj.Customer_fName}</p>`;
-				appendBlock += `<p>Last Name : ${obj.Customer_lName}</p>`;
-				appendBlock += `<p>Order Comments : ${obj.OrderComment}</p>`;					
-				appendBlock += "</div>";
-				mainDiv += appendBlock + '</div>';
+				appendBlock += `<td>${obj.Order_Id}</td>`;			
+				appendBlock += `<td>${obj.Customer_fName} ${obj.Customer_lName}</td>`;
+				appendBlock += `<td>${obj.OrderComment}</td>`;					
+				mainDiv += appendBlock + '</tr>';
 			}
 			infoDiv.innerHTML = mainDiv;	
 		}else{
