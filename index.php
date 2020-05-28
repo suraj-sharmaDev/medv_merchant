@@ -1,7 +1,10 @@
 <?php include('_includes/header.html'); ?>
 </head>
 <body>
-	<div class="d-flex flex-column">
+	<div class="container-fluid">
+	  <div class="p-2">
+	  	This page should be redesigned as login page
+	  </div>
 	  <div class="p-2">
 			<input type="text" id="merchant_id" placeholder="Enter Merchant Id" onkeyup="validator(event);" />	  	
 	  </div>
