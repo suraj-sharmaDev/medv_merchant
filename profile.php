@@ -2,7 +2,7 @@
 </head>
 <body>
 	<?php include('_includes/navbar.php'); ?>
-	<div class="container pt-3" id="info-div">
+	<div class="container-fluid pt-3" id="info-div">
 		<!-- contains the merchant info -->
 		<!-- autofilled by js -->
 	</div>
