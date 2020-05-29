@@ -29,13 +29,15 @@
 	          <span aria-hidden="true">&times;</span>
 	        </button>
 	      </div>
-	      <div class="modal-body" id="modal-body">
-	      	<!-- info about the order populated here -->
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-	        <button type="button" class="btn btn-primary">Quote Order</button>
-	      </div>
+	      <form action="quoteOrder.php" method="POST">	      
+		      <div class="modal-body" id="modal-body">
+		      	<!-- info about the order populated here -->
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		        <button type="submit" class="btn btn-primary">Quote Order</button>
+		      </div>
+	      </form>
 	    </div>
 	  </div>
 	</div>	
@@ -43,5 +45,5 @@
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-<script type="module" src="./scripts/openOrders.js"></script>
+<script type="module" src="./scripts/openOrders.js?v=<?php echo(rand(10,100)); ?>"></script>
 </html>

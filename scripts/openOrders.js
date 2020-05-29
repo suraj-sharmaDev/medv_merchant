@@ -1,4 +1,4 @@
-import {openOrders, viewOrder} from './ajax.js';
+import {openOrders, viewOrder, appConfig} from './ajax.js';
 
 var infoDiv = document.getElementById('info-div');
 
@@ -8,6 +8,7 @@ window.getOrderDetails = function (orderId){
 	.then((res)=>{
 		console.log(res.liOrdDtls);
 		var appendBlock = "<div class='appendBlock'>";
+		appendBlock += `<input type="hidden" name="orderId" value="${orderId}">`;
 		appendBlock += `<p>Customer Name ${res.Customer_fName} ${res.Customer_lName}</p>`;
 		appendBlock += "<p class='text-center'>Requested Medicines</p>";
 		res.liOrdDtls.map((order)=>{
@@ -55,3 +56,5 @@ if(_localStorage.merchId == null){
 		console.log(err)
 	})
 }
+
+

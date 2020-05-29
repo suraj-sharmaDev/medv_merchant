@@ -1,0 +1,81 @@
+1.
+View Merchant Profile 
+HttpGet
+http://182.18.157.79/medv/api/merch/profile?merchId=9  try these ids (14/5/16)
+On Success it will return object model
+On error now its returns insernale sever error / i'll fix the same 
+2.
+Get open Order by Merchant ID 
+HttpGet
+http://182.18.157.79/medv/api/order/getOpenOrder?merchId=5
+
+3. View Order 
+HttpGet
+http://182.18.157.79/medv/api/order/ordById?id=2431 try these ids (2430)
+
+4 .Remove Order from Merchant notified list
+HttpPost
+ http://182.18.157.79/medv/api/removeFromMylist?merchId=8&orderId=1079
+Note : Letter will change the param as FormBody
+
+0.1 Error Log
+http://182.18.157.79/medv/api/getLog
+
+5. Create Invoice
+HttpPost
+http://182.18.157.79/medv/api/order/createInv  
+        {  
+         "Order_Id":6098,
+        "MerchId":5,
+        "SubTotal" : 9999,
+        "Discount" : 100,
+        "OtherOff" : 12,
+        "DiscountPercentage" : 10,
+        "GST" : 999,
+        "GSTpercentage" : 18.2,
+        "billNo" : "SCEE/2010/001",
+        "Shipping" : 99,
+        "Total" : 999
+        "liOrdDtls" : [{
+          "OrderDtls_Id":5101,
+          "Order_Qty" : 8,
+          "Amt" :2000
+          },{
+          "OrderDtls_Id":5102,
+          "Order_Qty" : 7,
+          "Amt" :2001
+        }]}
+
+6. Edit Invoice 
+HttpPost 
+http://182.18.157.79/medv/api/editInvoice
+        {
+                "InvoiceMst_Id": 1016,
+                "SubTotal": 66,
+                "Discount":10 ,
+                "GST": 3,
+                "GSTpercentage" : 18.2,
+                "OtherOff" : 10,
+                "Shipping": 45,
+                "Merch_ServCharge": 4,
+                "Cust_ServCharge": 3,
+                "BillNo":"acc",
+                "Total": 156, 
+                "liInvDtls" : [{
+        	        "InvoiceDtls_Id":18,
+        	        "Qty":22,
+        	        "UoM":"No",
+        	        "Price":100,
+        	        "Amt":100.10
+                },{
+        	        "InvoiceDtls_Id":17,
+        	        "Qty":33,
+        	        "UoM":"No",
+        	        "Price":55.50,
+        	        "Amt":55.75
+                }]
+         }
+7. App Rate Config 
+http://182.18.157.79/medv/api/app/Config?stateId=1
+Note : this basically used to get the Offer% , Shipping charge, Express shipping charge ,GST etc. 
+

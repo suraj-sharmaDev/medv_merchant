@@ -9,6 +9,7 @@ class localstorage {
 		}else{
 			data = localStorage.getItem('merchId') == "null" ? null : localStorage.getItem('merchId');
 		}
+		console.log('Merchant Id : ',data);
 		return data;
 	}
 	addMerchant(merchId){
