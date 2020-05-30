@@ -23,7 +23,7 @@ const updateBill = () => {
 	//and do the subtotal calculation thereitself
 	var subTotal = 0;
 	formData.liOrdDtls.map((e)=>{
-		subTotal += parseInt(e.Amt)
+		subTotal += parseInt(e.Amt) * parseInt(e.Order_Qty)
 	});
 	formData.SubTotal = subTotal;
 	formData.GST = parseInt((formData.GSTpercentage * 0.01 * subTotal).toFixed(1));
