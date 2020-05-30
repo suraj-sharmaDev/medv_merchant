@@ -1,5 +1,6 @@
 //function call for quoteOrder
 var orderId = $('#orderId').val();
+// var orderId = 2623;
 var appConfig = JSON.parse($('#appConfig').val());
 
 var formData = {
@@ -12,6 +13,7 @@ var formData = {
 	GST : 0,
 	GSTpercentage : parseInt(appConfig.GST),
 	Shipping : parseInt(appConfig.stdShipping),
+	billNo : 'lorem/ipsum/'+Math.floor((Math.random() * 3000) + 1),
 	Total : 0,
 	liOrdDtls : []
 };
@@ -77,13 +79,30 @@ window.merchantDisc =  function (el){
 
 window.quoteOrder = function(){
 	var count = 5;
+	var url = 'http://182.18.157.79/medv/api/order/createInv';
 	$('input[type="number"]').each(function(){
 	   if($(this).val() !=""){
 	      count --;
 	    }
 	 });
 	 if(count == 0){
-	 	console.log('submitting');
+		(async () => {
+		  const rawResponse = await fetch(url, {
+		    method: 'POST',
+		    headers: {
+		      'Accept': 'application/json',
+		      'Content-Type': 'application/json'
+		    },
+		    body: JSON.stringify(formData)
+		  });
+		  const content = await rawResponse.text();
+		  if(content == -9){
+		  	alert('The Quotation has already been modified');
+		  }else{
+		  	alert('Your Quotation has been submitted');
+		  }
+		  window.location.href = "openOrders.php";	
+		})();	 	
 	 }else{
 	 	alert('Fill all the fields');
 	 }
