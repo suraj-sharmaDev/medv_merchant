@@ -1,9 +1,9 @@
 //function call for quoteOrder
-var orderId = $('#orderId').val();
+window.orderId = $('#orderId').val();
 // var orderId = 2623;
-var appConfig = JSON.parse($('#appConfig').val());
+window.appConfig = JSON.parse($('#appConfig').val());
 
-var formData = {
+window.formData = {
 	Order_Id : parseInt(orderId),
 	MerchId : parseInt(_localStorage.merchId),
 	SubTotal : 0,
@@ -43,6 +43,7 @@ $(".medicines").each(function() {
     var pushData = {
     	OrderDtls_Id : $(this).find('.OrderDtls_Id').val(),
     	Order_Qty : $(this).find('.Order_Qty').val(),
+    	UoM : "No",
     	Amt : $(this).find('.sp').val() ? parseInt($(this).find('.sp').val()) : 0,
     	MRP : $(this).find('.mrp').val() ? parseInt($(this).find('.mrp').val()) : 0
     }

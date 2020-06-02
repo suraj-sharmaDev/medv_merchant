@@ -22,6 +22,21 @@ if(_localStorage.merchId == null){
 	})
 }
 
+window.getOrderDetails = function (orderId, invoiceMstId){
+	console.log(orderId, invoiceMstId);
+	var orderInfo = document.getElementById('modal-body');
+	var appendBlock = "<div class='appendBlock'>";
+	appendBlock += `<input type="hidden" name="orderId" value="${orderId}">`;
+	appendBlock += `<input type="hidden" name="invoiceMstId" value="${invoiceMstId}">`;
+	appendBlock += '<p>Do you want to update this order?</p>';
+	appendBlock += "</div>";
+
+	orderInfo.innerHTML = appendBlock;
+
+	$('#modal').modal('toggle');
+
+	console.log(orderId, invoiceMstId);
+}
 function updatePage(){
 	var count = Object.keys(data).length;
 	if (count > 0) {
@@ -31,7 +46,7 @@ function updatePage(){
 	    mainDiv += '</thead><tbody>';
 	    for (let i = 0; i < count; i++) {
 	        let obj = data[i];
-	        mainDiv += '<tr class="orders-row" onclick="getOrderDetails(' + obj.Order_Id + ')">';
+	        mainDiv += '<tr class="orders-row" onclick="getOrderDetails(' + obj.Order_Id + ','+ obj.InvoiceMst_Id + ')">';
 	        let appendBlock = '';
 	        appendBlock += `<td>${obj.Order_Id}</td>`;
 	        appendBlock += `<td>${obj.Dist}</td>`;
