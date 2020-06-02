@@ -1,4 +1,4 @@
-import {profileApi, openOrderApi, viewOrderApi, removeOrderApi, appConfigApi, createInvoiceApi, updateInvoiceApi} from '../data/constants.js';
+import {profileApi, openOrderApi, viewOrderApi, appConfigApi, getQuotedOrdersApi, updateInvoiceApi} from '../data/constants.js';
 
 export const viewProfile = async(merchId) => {
 	var url = `${profileApi}?merchId=${merchId}`;
@@ -28,10 +28,9 @@ export const appConfig = async(stateId=1)=>{
 	return result;		
 }
 
-export const createInvoice = async(data) => {
-	console.log(data);
-	// var url = `${viewOrderApi}?id=${orderId}`;
-	// const response = await fetch(url);
-	// const result = await response.json();
-	// return result;	
+export const getQuotedOrders = async(merchId) => {
+	var url = `${getQuotedOrdersApi}?merchId=${merchId}`;
+	const response = await fetch(url);
+	const result = await response.json();
+	return result;
 }
