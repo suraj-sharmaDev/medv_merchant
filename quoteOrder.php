@@ -26,6 +26,9 @@
 	<?php include('_includes/navbar.php'); ?>
 	<div class="container-fluid pt-3" id="info-div">
 		<!-- contains the order info -->
+		<div class="text-center">
+            <h4>Order Id <?php echo $orderId; ?></h4>
+        </div>		
 		<form action="">
 			<input type="hidden" id="appConfig" value='<?php echo $apiConfig;?>' />
 			<input type="hidden" name="orderId" id="orderId" value="<?php echo $orderId; ?>" />			
@@ -43,11 +46,11 @@
 					</div>					
 					<div class="col-5">
 						<label for="mrp">MRP Price</label>
-						<input type="number" placeholder="0" class="form-control" class="mrp" onchange="changeMrp(this);" />
+						<input type="number" placeholder="0" class="form-control mrp" onchange="changeMrp(this);" />
 					</div>
 					<div class="col-5">
 						<label for="sp">Selling Price</label>
-						<input type="number" placeholder="0" class="form-control" class="sp" onchange="changeSp(this);" />
+						<input type="number" placeholder="0" class="form-control sp" onchange="changeSp(this);" />
 					</div>					
 				</div>
 			</div>
@@ -60,12 +63,12 @@
 				<span id="sub-total"></span>
 			</div>
 			<div class="w-50 mx-auto form-group d-flex justify-content-between">
-				<span>10% discount : </span>
+				<span><?php echo $config['stdAppOffer']; ?>% discount : </span>
 				<span id="discount"></span>
 			</div>
 			<div class="w-50 mx-auto form-group d-flex justify-content-between">
 				<span>Merchant Off : </span>
-				<input type="number" placeholder="0" class="mrp" onchange="merchantDisc(this);" value="0" />
+				<input type="number" placeholder="0" onchange="merchantDisc(this);" value="0" />
 			</div>
 			<div class="w-50 mx-auto form-group"><hr/></div>
 			<div class="w-50 mx-auto form-group d-flex justify-content-between">

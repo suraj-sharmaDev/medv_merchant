@@ -9,7 +9,7 @@ var formData = {
 	SubTotal : 0,
 	Discount : 0,
 	OtherOff : 0,
-	DiscountPercentage : 10,
+	DiscountPercentage : parseInt(appConfig.stdAppOffer),
 	GST : 0,
 	GSTpercentage : parseInt(appConfig.GST),
 	Shipping : parseInt(appConfig.stdShipping),
@@ -26,13 +26,14 @@ const updateBill = () => {
 		subTotal += parseInt(e.Amt) * parseInt(e.Order_Qty)
 	});
 	formData.SubTotal = subTotal;
-	formData.GST = parseInt((formData.GSTpercentage * 0.01 * subTotal).toFixed(1));
-	formData.Discount = parseInt((formData.DiscountPercentage * 0.01 * subTotal).toFixed(1));
-	formData.Total = formData.SubTotal + formData.GST + formData.Shipping - formData.Discount - formData.OtherOff;
+	formData.Discount = formData.DiscountPercentage > 0 ? parseFloat((formData.DiscountPercentage * 0.01 * subTotal).toFixed(2)) : 0;
+	var semiTotal = formData.SubTotal - formData.Discount - formData.OtherOff;
+	formData.GST = parseFloat((formData.GSTpercentage * 0.01 * semiTotal).toFixed(2));
+	formData.Total = parseFloat((semiTotal + formData.GST + formData.Shipping).toFixed(2));
 	$('#sub-total').html(subTotal);
 	$('#discount').html(formData.Discount);
 	$('#gst').html(formData.GST);
-	$('#total').html(formData.Total);	
+	$('#total').html(formData.Total);
 }
 
 //intial loop through all medicines
@@ -52,19 +53,38 @@ updateBill();
 console.log(formData);
 
 window.changeMrp = function (el){
+	//mrp should be greater than or equal to selling price
+	// if mrp is less than sp replace sp with mrp
 	var parent = $(el).closest('.medicines');
 	var OrderDtls_Id = $(parent).find('.OrderDtls_Id').val();
+	var sp = $(parent).find('.sp');
+	if((parseInt(el.value) < parseInt(sp.val())) || !sp.val()){
+		sp.val(el.value)
+	}
+	//updating formdata
 	var index = formData.liOrdDtls.findIndex((v)=>v.OrderDtls_Id==OrderDtls_Id);
 	var updated = formData.liOrdDtls[index];
 	updated.MRP = parseInt(el.value); 
+	updated.Amt = parseInt(sp.val());
 	formData.liOrdDtls[index] = updated;
+	//after updating formdata we have to make necessary updates in
+	//bill too
+	updateBill();
 }
 
 window.changeSp = function (el){
+	//selling price should be less than or equal to mrp
+	//if sp is greater than mrp => replace mrp with sp
 	var parent = $(el).closest('.medicines');
 	var OrderDtls_Id = $(parent).find('.OrderDtls_Id').val();
+	var mrp = $(parent).find('.mrp');
+	if(parseInt(el.value) > parseInt(mrp.val()) || !mrp.val()){
+		mrp.val(el.value)
+	}	
+	//updating formdata
 	var index = formData.liOrdDtls.findIndex((v)=>v.OrderDtls_Id==OrderDtls_Id);
 	var updated = formData.liOrdDtls[index];
+	updated.MRP = parseInt(mrp.val());
 	updated.Amt = parseInt(el.value); 
 	formData.liOrdDtls[index] = updated;
 	//after updating formdata we have to make necessary updates in
@@ -78,7 +98,7 @@ window.merchantDisc =  function (el){
 }
 
 window.quoteOrder = function(){
-	var count = 5;
+	var count = $('input[type="number"]').length;	
 	var url = 'http://182.18.157.79/medv/api/order/createInv';
 	$('input[type="number"]').each(function(){
 	   if($(this).val() !=""){
@@ -104,6 +124,7 @@ window.quoteOrder = function(){
 		  window.location.href = "openOrders.php";	
 		})();	 	
 	 }else{
+	 	console.log(count);
 	 	alert('Fill all the fields');
 	 }
 }

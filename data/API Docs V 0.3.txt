@@ -79,3 +79,5 @@ http://182.18.157.79/medv/api/editInvoice
 http://182.18.157.79/medv/api/app/Config?stateId=1
 Note : this basically used to get the Offer% , Shipping charge, Express shipping charge ,GST etc. 
 
+8. Get Submitted Orders
+http://182.18.157.79/medv/api/getMySubmitedQuote
