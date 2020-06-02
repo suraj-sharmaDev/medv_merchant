@@ -19,7 +19,7 @@
 				<select name="filter" id="filter" onchange="filterStruct(this);">
 				  <option value="Order_Id">Order Id</option>
 				  <option value="Dist">Distance</option>
-<!-- 				  <option value="date">Date</option> -->
+				  <option value="OrderDate">Date</option>
 				</select>
 			</div>
 		</div>

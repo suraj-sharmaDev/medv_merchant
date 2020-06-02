@@ -30,7 +30,7 @@ window.getOrderDetails = function (orderId){
 if(_localStorage.merchId == null){
 	window.location.href = "index.php";
 }else{
-	openOrders(5)
+	openOrders(_localStorage.merchId)
 	.then((res)=>{
 		console.log(res[0]);
 		//check the size of array res
@@ -56,7 +56,7 @@ function updatePage(){
 	        appendBlock += `<td>${obj.Order_Id}</td>`;
 	        appendBlock += `<td>${obj.Dist}</td>`;
 	        appendBlock += `<td>${obj.LandMark}</td>`;
-	        appendBlock += `<td>${obj.OrderDate}</td>`;
+	        appendBlock += `<td>${obj.OrderDate.toDateString()}</td>`;
 	        mainDiv += appendBlock + '</tr>';
 	    }
 	    infoDiv.innerHTML = mainDiv;
@@ -89,7 +89,7 @@ const merge = (left, right) => {
 	//check if either left array and right array is empty
 	while(left.length && right.length){
 		//find lower value
-		if(left[0][type] <= right[0][type]){
+		if(left[0][type] >= right[0][type]){
 			//add left value
 			result.push(left.shift()); //shift pops out first value
 		}else{

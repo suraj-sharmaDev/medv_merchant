@@ -11,6 +11,11 @@ export const openOrders = async(merchId) => {
 	var url = `${openOrderApi}?merchId=${merchId}`;
 	const response = await fetch(url);
 	const result = await response.json();
+	//convert all the string date to readable
+	result.map((r)=>{
+		r.OrderDate = new Date(r.OrderDate);
+	})
+
 	return result;
 }
 
