@@ -12,7 +12,7 @@
 </head>
 <body>
 	<?php include('_includes/navbar.php'); ?>
-	<div class="container">
+	<div class="container-fluid pt-3">
 		<div class="row">
 			<div class="col">
 				<label for="filter">Sort Table By : </label>
