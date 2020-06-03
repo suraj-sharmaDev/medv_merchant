@@ -1,3 +1,4 @@
+import {createInvoiceApi} from '../data/constants.js';
 //function call for quoteOrder
 window.orderId = $('#orderId').val();
 // var orderId = 2623;
@@ -100,7 +101,6 @@ window.merchantDisc =  function (el){
 
 window.quoteOrder = function(){
 	var count = $('input[type="number"]').length;	
-	var url = 'http://182.18.157.79/medv/api/order/createInv';
 	$('input[type="number"]').each(function(){
 	   if($(this).val() !=""){
 	      count --;
@@ -108,7 +108,7 @@ window.quoteOrder = function(){
 	 });
 	 if(count == 0){
 		(async () => {
-		  const rawResponse = await fetch(url, {
+		  const rawResponse = await fetch(createInvoiceApi, {
 		    method: 'POST',
 		    headers: {
 		      'Accept': 'application/json',

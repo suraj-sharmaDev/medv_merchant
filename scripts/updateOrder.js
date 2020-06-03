@@ -1,3 +1,5 @@
+import {updateInvoiceApi} from '../data/constants.js';
+
 window.updateOrder = () => {
 	var invoiceMstId = $('#invoiceMstId').val();
 	formData.InvoiceMst_Id = parseInt(invoiceMstId);
@@ -8,7 +10,6 @@ window.updateOrder = () => {
 	formData.liInvDtls = medicines;
 
 	var count = $('input[type="number"]').length;	
-	var url = 'http://182.18.157.79/medv/api/editInvoice';
 	$('input[type="number"]').each(function(){
 	   if($(this).val() !=""){
 	      count --;
@@ -16,7 +17,7 @@ window.updateOrder = () => {
 	 });
 	 if(count == 0){
 		(async () => {
-		  const rawResponse = await fetch(url, {
+		  const rawResponse = await fetch(updateInvoiceApi, {
 		    method: 'POST',
 		    headers: {
 		      'Accept': 'application/json',

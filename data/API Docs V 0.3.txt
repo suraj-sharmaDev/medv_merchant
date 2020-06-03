@@ -81,3 +81,9 @@ Note : this basically used to get the Offer% , Shipping charge, Express shipping
 
 8. Get Submitted Orders
 http://182.18.157.79/medv/api/getMySubmitedQuote
+
+9. Get Prescription list for order
+http://medv.in/medv/api/getprescriptionList?OrderId=2598
+
+10. Get the image
+http://medv.in/medv/api/Image/getprescriptionImage?OrderId=2598&imageName=

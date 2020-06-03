@@ -1,19 +1,30 @@
-import {openOrders, viewOrder, appConfig} from './ajax.js';
+import {openOrders, viewOrder, appConfig} from './ajax.js?ver=1';
 
 var infoDiv = document.getElementById('info-div');
 var data = null;
 var type = null;
 
 window.getOrderDetails = function (orderId){
+	var imgUrl = `http://medv.in/medv/api/Image/getprescriptionImage?OrderId=${orderId}&imageName=`;
 	var orderInfo = document.getElementById('modal-body');
 	viewOrder(orderId)
 	.then((res)=>{
-		console.log(res.liOrdDtls);
+		var orders = res.orderResult;
+		var prescriptions = res.presResult;
 		var appendBlock = "<div class='appendBlock'>";
 		appendBlock += `<input type="hidden" name="orderId" value="${orderId}">`;
-		appendBlock += `<p>Customer Name ${res.Customer_fName} ${res.Customer_lName}</p>`;
+		//also if prescription exists form a gallery of presciption images
+		if(prescriptions.length > 0){
+			appendBlock += '<p>Prescription Images</p>';			
+			prescriptions.map(p=>{
+				var img = imgUrl+p;
+				appendBlock += `<a data-fancybox="gallery" href=${img} class="imageList"><img class="thumbnail" src=${img}></a>`;
+			})			
+		}
+		// appendBlock += `<a data-fancybox="gallery" href=${img} class="imageList"><img class="thumbnail" src=${img}></a>`;
+		// appendBlock += `<a data-fancybox="gallery" href=${img} class="imageList"><img class="thumbnail" src=${img}></a>`;		
 		appendBlock += "<p class='text-center'>Requested Medicines</p>";
-		res.liOrdDtls.map((order)=>{
+		orders.liOrdDtls.map((order)=>{
 			appendBlock += `<p>${order.Order_Qty} X ${order.MedicineName}</p>`;
 		})
 		appendBlock += "</div>";
@@ -26,6 +37,9 @@ window.getOrderDetails = function (orderId){
 	})
 }
 
+window.enlarge = (el) => {
+	$(el).width(1000);
+}
 // main function call
 if(_localStorage.merchId == null){
 	window.location.href = "index.php";

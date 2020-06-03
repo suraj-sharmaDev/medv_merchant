@@ -9,3 +9,6 @@ export const createInvoiceApi = baseUrl+'medv/api/order/createInv';
 export const getQuotedOrdersApi = baseUrl+'medv/api/getMySubmitedQuote';
 export const updateInvoiceApi = baseUrl+'medv/api/editInvoice';
 export const appConfigApi = baseUrl+'medv/api/app/Config'; 
+
+export const getPrescriptionApi = baseUrl+'medv/api/getprescriptionList';
+export const getImageApi = baseUrl+'medv/api/Image/getprescriptionImage';

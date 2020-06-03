@@ -1,4 +1,5 @@
 <?php include('_includes/header.html'); ?>
+<link rel="stylesheet" href="assets/css/jquery.fancybox.min.css" type="text/css" media="screen" />
 	<style type="text/css">
 	.orders-row {
 	    cursor: pointer;
@@ -7,7 +8,14 @@
 	.orders-row:hover {
 	    cursor: pointer;
 	    background-color : blue;
-	}	
+	}
+	.imageList {
+		margin : 10px;
+	}
+	.thumbnail {
+		height : 20%;
+		width : 20%;
+	}
 	</style>
 </head>
 <body>
@@ -55,6 +63,7 @@
 </body>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" crossorigin="anonymous"></script>
-<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="assets/js/jquery.fancybox.min.js"></script>
 <script type="module" src="./scripts/openOrders.js?v=<?php echo(rand(10,100)); ?>"></script>
 </html>
