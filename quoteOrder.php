@@ -13,14 +13,29 @@
 		$curlConfig = new Curl_helper($configUrl);
 		$apiConfig = $curlConfig->exec();
 
-		if(!$apiOrder && !$apiConfig){
+		$presUrl = 'http://medv.in/medv/api/getprescriptionList?OrderId='.$orderId;
+		$curlPres = new Curl_helper($presUrl);
+		$apiPres = $curlPres->exec();
+
+		if(!$apiOrder && !$apiConfig && !$apiPres){
 			echo 'There was an issue in server side!. Please contact administrator';
 		}else{
 			$config = json_decode($apiConfig, true); 
+			$prescription = json_decode($apiPres, true);
 			$data = json_decode($apiOrder, true)['liOrdDtls'];
 
 ?>
 <?php include('_includes/header.html'); ?>
+<link rel="stylesheet" href="assets/css/jquery.fancybox.min.css" type="text/css" media="screen" />
+	<style type="text/css">
+	.imageList {
+		margin : 10px;
+	}
+	.thumbnail {
+		height : 10%;
+		width : 10%;
+	}
+	</style>
 </head>
 <body>
 	<?php include('_includes/navbar.php'); ?>
@@ -30,6 +45,20 @@
             <h4>Order Id <?php echo $orderId; ?></h4>
         </div>		
 		<form action="">
+			<h5>Prescriptions</h5><br>			
+			<?php 
+				if(sizeof($prescription)>0){
+					$imgUrl = "http://medv.in/medv/api/Image/getprescriptionImage?OrderId=".$orderId."&imageName=";
+					foreach ($prescription as $key => $value) {
+						$img = $imgUrl.$value;
+			?>
+			<a data-fancybox="gallery" href="<?php echo $img; ?>" class="imageList"><img class="thumbnail" src="<?php echo $img; ?>"></a>
+			<?php
+					} //end of foreach
+				} //end of if
+			?>
+			<br><br>
+			<h5>Requested Medicines</h5><br>
 			<input type="hidden" id="appConfig" value='<?php echo $apiConfig;?>' />
 			<input type="hidden" name="orderId" id="orderId" value="<?php echo $orderId; ?>" />			
 			<?php
@@ -94,6 +123,7 @@
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="assets/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="assets/js/jquery.fancybox.min.js"></script>
 </html>
 
 <?php
