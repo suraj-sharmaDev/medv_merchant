@@ -30,6 +30,7 @@ function updatePage(){
 	        let obj = data[i];
 	        mainDiv += '<tr class="orders-row" onclick="modalToggle(this);">';
 	        let appendBlock = '';
+	        appendBlock += `<input type="hidden" class="invoiceId" value=${obj.InvoiceMst_Id}>`;
 	        appendBlock += `<td class="orderId">${obj.Order_Id}</td>`;
 	        appendBlock += `<td>${obj.LandMark}</td>`;
 	        appendBlock += `<td>${obj.OrderDate.toDateString()}</td>`;
@@ -46,10 +47,12 @@ function updatePage(){
 window.modalToggle = function(el){
 	//since the el is the parent class
 	//find its child with orderId class
+	var invoiceId = parseInt($(el).find(".invoiceId").val());
 	var orderId = parseInt($(el).find(".orderId").html());
 	formData = {
-		orderId : orderId
+		invoiceId : invoiceId
 	}
+
 	$('#orderId').html(orderId);
 	$('#modal').modal('toggle');
 }
@@ -59,7 +62,7 @@ window.dispatch = function(){
 	if(billNo){
 		formData.billNo = parseInt(billNo);
 		//make an ajax request to dispatch this order
-		var url = `${dispatchOrderApi}?invId=${formData.orderId}&billNo=${formData.billNo}`;
+		var url = `${dispatchOrderApi}?invId=${formData.invoiceId}&billNo=${formData.billNo}`;
 		(async () => {
 		  const rawResponse = await fetch(url, {
 		    method: 'POST'
