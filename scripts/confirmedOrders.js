@@ -38,7 +38,7 @@ function updatePage(){
 	    }
 	    infoDiv.innerHTML = mainDiv;
 	} else {
-	    infoDiv.innerHTML = '<div class="mainDiv">No Open Orders</div>';
+	    infoDiv.innerHTML = '<div class="mainDiv">No Confirmed Orders</div>';
 	}
 	console.log(data);
 }
