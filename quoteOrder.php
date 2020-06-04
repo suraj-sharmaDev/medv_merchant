@@ -45,9 +45,9 @@
             <h4>Order Id <?php echo $orderId; ?></h4>
         </div>		
 		<form action="">
-			<h5>Prescriptions</h5><br>			
 			<?php 
 				if(sizeof($prescription)>0){
+					echo "<h5>Prescriptions</h5><br>";					
 					$imgUrl = "http://medv.in/medv/api/Image/getprescriptionImage?OrderId=".$orderId."&imageName=";
 					foreach ($prescription as $key => $value) {
 						$img = $imgUrl.$value;
@@ -55,14 +55,15 @@
 			<a data-fancybox="gallery" href="<?php echo $img; ?>" class="imageList"><img class="thumbnail" src="<?php echo $img; ?>"></a>
 			<?php
 					} //end of foreach
+					echo "<br><br>";
 				} //end of if
 			?>
-			<br><br>
 			<h5>Requested Medicines</h5><br>
 			<input type="hidden" id="appConfig" value='<?php echo $apiConfig;?>' />
 			<input type="hidden" name="orderId" id="orderId" value="<?php echo $orderId; ?>" />			
 			<?php
 				//iterate over the medicines got from api above
+			 if(sizeof($data) > 0){
 				foreach ($data as $key => $value) {
 			?>
 			<div class="form-group medicines">
@@ -75,16 +76,17 @@
 					</div>					
 					<div class="col-5">
 						<label for="mrp">MRP Price</label>
-						<input type="number" placeholder="0" class="form-control mrp" onchange="changeMrp(this);" />
+						<input type="number" placeholder="0" class="form-control mrp" value="0" onchange="changeMrp(this);" />
 					</div>
 					<div class="col-5">
 						<label for="sp">Selling Price</label>
-						<input type="number" placeholder="0" class="form-control sp" onchange="changeSp(this);" />
+						<input type="number" placeholder="0" class="form-control sp" value="0" onchange="changeSp(this);" />
 					</div>					
 				</div>
 			</div>
 			<?php
 				}//end of foreach
+			 } //end of if
 			?>
 			<!-- final bill for the order -->
 			<div class="w-50 mx-auto form-group d-flex justify-content-between">

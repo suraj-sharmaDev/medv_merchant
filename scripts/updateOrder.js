@@ -4,7 +4,7 @@ window.updateOrder = () => {
 	var invoiceMstId = $('#invoiceMstId').val();
 	formData.InvoiceMst_Id = parseInt(invoiceMstId);
 	delete formData.billNo;
-	formData.BillNo = 'lorem/ipsum/'+Math.floor((Math.random() * 3000) + 1);
+	formData.BillNo = 'quote';
 	var medicines = formData.liOrdDtls;
 	delete formData.liOrdDtls;
 	formData.liInvDtls = medicines;

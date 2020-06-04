@@ -14,7 +14,7 @@ window.formData = {
 	GST : 0,
 	GSTpercentage : parseInt(appConfig.GST),
 	Shipping : parseInt(appConfig.stdShipping),
-	billNo : 'lorem/ipsum/'+Math.floor((Math.random() * 3000) + 1),
+	billNo : 'quote',
 	Total : 0,
 	liOrdDtls : []
 };
@@ -60,8 +60,10 @@ window.changeMrp = function (el){
 	var parent = $(el).closest('.medicines');
 	var OrderDtls_Id = $(parent).find('.OrderDtls_Id').val();
 	var sp = $(parent).find('.sp');
-	if((parseInt(el.value) < parseInt(sp.val())) || !sp.val()){
-		sp.val(el.value)
+
+	$(el).val(parseInt($(el).val()))
+	if((parseInt(el.value) < parseInt(sp.val())) || sp.val()==0){
+		sp.val(parseInt(el.value))
 	}
 	//updating formdata
 	var index = formData.liOrdDtls.findIndex((v)=>v.OrderDtls_Id==OrderDtls_Id);
@@ -80,8 +82,9 @@ window.changeSp = function (el){
 	var parent = $(el).closest('.medicines');
 	var OrderDtls_Id = $(parent).find('.OrderDtls_Id').val();
 	var mrp = $(parent).find('.mrp');
+	$(el).val(parseInt($(el).val()))
 	if(parseInt(el.value) > parseInt(mrp.val()) || !mrp.val()){
-		mrp.val(el.value)
+		mrp.val(parseInt(el.value))
 	}	
 	//updating formdata
 	var index = formData.liOrdDtls.findIndex((v)=>v.OrderDtls_Id==OrderDtls_Id);

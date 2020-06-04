@@ -1,4 +1,5 @@
-import {profileApi, openOrderApi, viewOrderApi, appConfigApi, getQuotedOrdersApi, updateInvoiceApi, getPrescriptionApi} from '../data/constants.js';
+import {profileApi, openOrderApi, viewOrderApi, appConfigApi, getQuotedOrdersApi, updateInvoiceApi, getPrescriptionApi,
+getConfirmedOrdersApi, getDispatchedOrdersApi} from '../data/constants.js?ver=3';
 
 export const viewProfile = async(merchId) => {
 	var url = `${profileApi}?merchId=${merchId}`;
@@ -46,5 +47,27 @@ export const getQuotedOrders = async(merchId) => {
 	result.map((r)=>{
 		r.OrderDate = new Date(r.OrderDate);
 	})
+	return result;
+}
+
+export const getConfirmedOrders = async(merchId) => {
+	var url = `${getConfirmedOrdersApi}?merchId=${merchId}`;
+	const response = await fetch(url);
+	const result = await response.json();
+	//convert all the string date to readable
+	result.map((r)=>{
+		r.OrderDate = new Date(r.OrderDate);
+	})	
+	return result;
+}
+
+export const getDispatchedOrders = async(merchId) => {
+	var url = `${getDispatchedOrdersApi}?merchId=${merchId}`;
+	const response = await fetch(url);
+	const result = await response.json();
+	//convert all the string date to readable
+	result.map((r)=>{
+		r.OrderDate = new Date(r.OrderDate);
+	})		
 	return result;
 }

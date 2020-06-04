@@ -12,3 +12,7 @@ export const appConfigApi = baseUrl+'medv/api/app/Config';
 
 export const getPrescriptionApi = baseUrl+'medv/api/getprescriptionList';
 export const getImageApi = baseUrl+'medv/api/Image/getprescriptionImage';
+
+export const getConfirmedOrdersApi = baseUrl+'medv/api/getMyConfirmedOrders';
+export const dispatchOrderApi = baseUrl+'medv/api/updateOrderDispatch';
+export const getDispatchedOrdersApi = baseUrl+'medv/api/getDispatchedOrders';

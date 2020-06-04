@@ -87,3 +87,13 @@ http://medv.in/medv/api/getprescriptionList?OrderId=2598
 
 10. Get the image
 http://medv.in/medv/api/Image/getprescriptionImage?OrderId=2598&imageName=
+
+11. Get confirmed Orders
+http://182.18.157.79/medv/api/getMyConfirmedOrders?merchId=8
+
+12. Get dispatched Orders
+http://182.18.157.79/medv/api/getDispatchedOrders?merchId=5
+
+13. To post the bill no. to dispatch order
+http://182.18.157.79/medv/api/updateOrderDispatch?invId=1083&billNo=34e
+//post method

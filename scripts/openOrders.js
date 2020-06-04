@@ -37,9 +37,6 @@ window.getOrderDetails = function (orderId){
 	})
 }
 
-window.enlarge = (el) => {
-	$(el).width(1000);
-}
 // main function call
 if(_localStorage.merchId == null){
 	window.location.href = "index.php";

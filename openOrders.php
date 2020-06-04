@@ -21,6 +21,9 @@
 <body>
 	<?php include('_includes/navbar.php'); ?>
 	<div class="container-fluid pt-3">
+		<div class="text-center">
+			List of Open Orders
+		</div>
 		<div class="row">
 			<div class="col">
 				<label for="filter">Sort Table By : </label>

@@ -11,11 +11,17 @@
         <a class="nav-link" href="profile.php">Profile<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item <?php echo $currentPage=='openOrders' ? 'active' : ''  ?>">
-        <a class="nav-link" href="openOrders.php">Orders</a>
+        <a class="nav-link" href="openOrders.php">Open Orders</a>
       </li>
       <li class="nav-item <?php echo $currentPage=='submittedOrders' ? 'active' : ''  ?>">
         <a class="nav-link" href="submittedOrders.php">Submitted Orders</a>
-      </li>      
+      </li>
+      <li class="nav-item <?php echo $currentPage=='confirmedOrders' ? 'active' : ''  ?>">
+        <a class="nav-link" href="confirmedOrders.php">Confirmed Orders</a>
+      </li>
+      <li class="nav-item <?php echo $currentPage=='dispatchedOrders' ? 'active' : ''  ?>">
+        <a class="nav-link" href="dispatchedOrders.php">Dispatched Orders</a>
+      </li>                  
     </ul>
     <span>
       <button class="btn btn-primary" onclick="logout();">Logout</button>
