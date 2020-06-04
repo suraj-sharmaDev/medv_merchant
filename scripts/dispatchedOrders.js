@@ -24,14 +24,14 @@ function updatePage(){
 	if (count > 0) {
 	    var mainDiv = '<table class="table table-dark" border = "1">';
 	    mainDiv += '<thead>';
-	    mainDiv += '<tr><td>Order Id</td><td>Landmark</td><td>Order Date</td><td>Total</td></tr>';
+	    mainDiv += '<tr><td>Bill No</td><td>Order Date</td><td>Total</td></tr>';
 	    mainDiv += '</thead><tbody>';
 	    for (let i = 0; i < count; i++) {
 	        let obj = data[i];
 	        mainDiv += '<tr class="orders-row" onclick="modalToggle(this);">';
 	        let appendBlock = '';
-	        appendBlock += `<td class="orderId">${obj.Order_Id}</td>`;
-	        appendBlock += `<td>${obj.LandMark}</td>`;
+	        appendBlock += `<td class="orderId">${obj.BillNo}</td>`;
+	        // appendBlock += `<td>${obj.PayMode}</td>`;
 	        appendBlock += `<td>${obj.OrderDate.toDateString()}</td>`;
 	        appendBlock += `<td>${obj.Total}</td>`;	        
 	        mainDiv += appendBlock + '</tr>';
