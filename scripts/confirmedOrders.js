@@ -1,5 +1,5 @@
 import {getConfirmedOrders} from './ajax.js?ver=4';
-import {dispatchOrderApi} from '../data/constants?ver=4';
+import {dispatchOrderApi} from '../data/constants.js?ver=4';
 
 var infoDiv = document.getElementById('info-div');
 var data = null;
