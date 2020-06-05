@@ -1,4 +1,4 @@
-import {getDispatchedOrders} from './ajax.js?ver=4';
+import {getDispatchedOrders} from './ajax.js?ver=5';
 import {dispatchOrderApi} from '../data/constants.js?ver=4';
 
 var infoDiv = document.getElementById('info-div');
@@ -24,15 +24,15 @@ function updatePage(){
 	if (count > 0) {
 	    var mainDiv = '<table class="table table-dark" border = "1">';
 	    mainDiv += '<thead>';
-	    mainDiv += '<tr><td>Bill No</td><td>Order Date</td><td>Total</td></tr>';
+	    mainDiv += '<tr><td>Bill No</td><td>Order Date</td><td>Dispatched Date</td><td>Total</td></tr>';
 	    mainDiv += '</thead><tbody>';
 	    for (let i = 0; i < count; i++) {
 	        let obj = data[i];
 	        mainDiv += '<tr class="orders-row" onclick="modalToggle(this);">';
 	        let appendBlock = '';
 	        appendBlock += `<td class="orderId">${obj.BillNo}</td>`;
-	        // appendBlock += `<td>${obj.PayMode}</td>`;
 	        appendBlock += `<td>${obj.OrderDate.toDateString()}</td>`;
+	        appendBlock += `<td>${obj.DispatchedOn.toDateString()}</td>`;	        
 	        appendBlock += `<td>${obj.Total}</td>`;	        
 	        mainDiv += appendBlock + '</tr>';
 	    }

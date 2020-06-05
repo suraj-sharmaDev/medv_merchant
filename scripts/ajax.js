@@ -68,6 +68,7 @@ export const getDispatchedOrders = async(merchId) => {
 	//convert all the string date to readable
 	result.map((r)=>{
 		r.OrderDate = new Date(r.OrderDate);
+		r.DispatchedOn = new Date(r.DispatchedOn);
 	})		
 	return result;
 }
