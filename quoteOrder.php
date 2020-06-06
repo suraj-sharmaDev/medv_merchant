@@ -40,7 +40,7 @@
 		height : 10%;
 		width : 10%;
 	}
-	#map {
+	.map {
 		height: 300px;
 		width: 100%;
 	}
@@ -54,7 +54,9 @@
             <h4>Order Id <?php echo $orderId; ?></h4>
         </div>
         <!-- display map here -->
-        <div id="map"></div> 
+        <div id="map" style="margin-bottom: 10px">
+        	<button class="btn btn-primary" onclick="initMap();">See the location in maps</button>
+        </div> 
        	<!-- prescription images   -->
 		<form action="">
 			<?php 
@@ -138,6 +140,7 @@
 	customerCoords = <?php echo(json_encode($geoCords));?>;
 </script>
 <script src="assets/js/maps.js"></script>
+<script src="./scripts/mapInit.js?v=1"></script>
 <script type="module" src="./scripts/quoteOrder.js?v=<?php echo(rand(10,100)); ?>"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" crossorigin="anonymous"></script>

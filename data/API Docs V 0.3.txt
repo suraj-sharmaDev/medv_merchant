@@ -98,6 +98,9 @@ http://medv.in/medv/api/Image/getprescriptionImage?OrderId=2598&imageName=
 11. Get confirmed Orders
 http://182.18.157.79/medv/api/getMyConfirmedOrders?merchId=8
 
+13. Get Invoice by Id
+http://182.18.157.79/medv/api/getInvById?id=1244
+
 12. Get dispatched Orders
 http://182.18.157.79/medv/api/getDispatchedOrders?merchId=5
 

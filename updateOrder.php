@@ -6,7 +6,7 @@
 		$orderId = $_POST['orderId'];
 		$invoiceMstId = $_POST['invoiceMstId'];
 		//first the curl response to get order details
-		$orderUrl = 'http://medv.in/medv/api/order/ordById?id='.$orderId;
+		$orderUrl = 'http://medv.in/medv/api/getInvById?id='.$invoiceMstId;
 		$curlOrder = new Curl_helper($orderUrl);
 		$apiOrder = $curlOrder->exec();
 
@@ -18,10 +18,24 @@
 			echo 'There was an issue in server side!. Please contact administrator';
 		}else{
 			$config = json_decode($apiConfig, true); 
-			$data = json_decode($apiOrder, true)['liOrdDtls'];
+			$order = json_decode($apiOrder, true);
+			$geoCords = array(
+				"lat" => $order['DeliveryGEOLat'],
+				"lng" => $order['DeliveryGEOLng']
+			);			
+			$medicines = $order['liInvDtls'];
 
 ?>
 <?php include('_includes/header.php'); ?>
+<style>
+	.map {
+		height: 300px;
+		width: 100%;
+	}	
+</style>
+<script>
+	customerCoords = <?php echo(json_encode($geoCords));?>;
+</script>
 </head>
 <body>
 	<?php include('_includes/navbar.php'); ?>
@@ -30,29 +44,32 @@
 		<div class="text-center">
             <h4>Updating Order with Id <?php echo $orderId; ?></h4>
         </div>		
+        <div id="map" style="margin-bottom: 10px">
+        	<button class="btn btn-primary" onclick="initMap();">See the location in maps</button>
+        </div>         
 		<form action="">
 			<input type="hidden" id="appConfig" value='<?php echo $apiConfig;?>' />
 			<input type="hidden" name="orderId" id="orderId" value="<?php echo $orderId; ?>" />			
 			<input type="hidden" name="invoiceMstId" id="invoiceMstId" value="<?php echo $invoiceMstId; ?>" />						
 			<?php
 				//iterate over the medicines got from api above
-				foreach ($data as $key => $value) {
+				foreach ($medicines as $key => $value) {
 			?>
 			<div class="form-group medicines">
-				<input type="hidden" class="OrderDtls_Id" value="<?php echo $value['OrderDtls_Id']; ?>" />
-				<input type="hidden" class="Order_Qty" value="<?php echo $value['Order_Qty']; ?>" />
+				<input type="hidden" class="InvoiceDtls_Id" value="<?php echo $value['InvoiceDtls_Id']; ?>" />
+				<input type="hidden" class="Order_Qty" value="<?php echo $value['Qty']; ?>" />
 				<p><?php echo $value['MedicineName']; ?></p>
 				<div class="row">
 					<div class="col-2">
-						<?php echo $value['Order_Qty'].' '.'No'; ?>			
+						<?php echo $value['Qty'].' '.'No'; ?>			
 					</div>					
 					<div class="col-5">
 						<label for="mrp">MRP Price</label>
-						<input type="number" placeholder="0" class="form-control mrp" onchange="changeMrp(this);" />
+						<input type="number" placeholder="0" class="form-control mrp" onchange="changeMrp(this);" value="<?php echo $value['Price']?>"/>
 					</div>
 					<div class="col-5">
 						<label for="sp">Selling Price</label>
-						<input type="number" placeholder="0" class="form-control sp" onchange="changeSp(this);" />
+						<input type="number" placeholder="0" class="form-control sp" onchange="changeSp(this);" value="<?php echo $value['Price']?>" />
 					</div>					
 				</div>
 			</div>
@@ -70,7 +87,7 @@
 			</div>
 			<div class="w-50 mx-auto form-group d-flex justify-content-between">
 				<span>Merchant Off : </span>
-				<input type="number" placeholder="0" onchange="merchantDisc(this);" value="0" />
+				<input type="number" placeholder="0" onchange="merchantDisc(this);" value="<?php echo $order['OtherOff']?>"/>
 			</div>
 			<div class="w-50 mx-auto form-group"><hr/></div>
 			<div class="w-50 mx-auto form-group d-flex justify-content-between">
@@ -92,7 +109,8 @@
 		</form>
 	</div>
 </body>
-<script type="module" src="./scripts/quoteOrder.js?v=<?php echo(rand(10,100)); ?>"></script>
+<script src="assets/js/maps.js"></script>
+<script src="./scripts/mapInit.js"></script>
 <script type="module" src="./scripts/updateOrder.js?v=<?php echo(rand(10,100)); ?>"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" crossorigin="anonymous"></script>
