@@ -34,6 +34,7 @@
 	}	
 </style>
 <script>
+	console.log(<?php echo $apiOrder?>);
 	customerCoords = <?php echo(json_encode($geoCords));?>;
 </script>
 </head>
@@ -57,7 +58,7 @@
 			?>
 			<div class="form-group medicines">
 				<input type="hidden" class="InvoiceDtls_Id" value="<?php echo $value['InvoiceDtls_Id']; ?>" />
-				<input type="hidden" class="Order_Qty" value="<?php echo $value['Qty']; ?>" />
+				<input type="hidden" class="Qty" value="<?php echo $value['Qty']; ?>" />
 				<p><?php echo $value['MedicineName']; ?></p>
 				<div class="row">
 					<div class="col-2">

@@ -24,7 +24,7 @@ const updateBill = () => {
 	//and do the subtotal calculation thereitself
 	var subTotal = 0;
 	formData.liInvDtls.map((e)=>{
-		subTotal += parseInt(e.Price) * parseInt(e.Order_Qty)
+		subTotal += parseInt(e.Price) * parseInt(e.Qty)
 	});
 	formData.SubTotal = subTotal;
 	formData.Discount = formData.DiscountPercentage > 0 ? parseFloat((formData.DiscountPercentage * 0.01 * subTotal).toFixed(2)) : 0;
@@ -45,7 +45,7 @@ $(".medicines").each(function() {
     //Price is SP
     var pushData = {
     	InvoiceDtls_Id : $(this).find('.InvoiceDtls_Id').val(),
-    	Order_Qty : $(this).find('.Order_Qty').val(),
+    	Qty : $(this).find('.Qty').val(),
     	UoM : "No",
     	Amt : $(this).find('.mrp').val() ? parseInt($(this).find('.mrp').val()) : 0,
     	Price : $(this).find('.sp').val() ? parseInt($(this).find('.sp').val()) : 0
@@ -119,6 +119,7 @@ window.updateOrder = () => {
 	    }
 	 });
 	 if(count == 0){
+	 	console.log(formData);
 		(async () => {
 		  const rawResponse = await fetch(updateInvoiceApi, {
 		    method: 'POST',
