@@ -1,4 +1,4 @@
-<?php include('_includes/header.html'); ?>
+<?php include('_includes/header.php'); ?>
 	<style type="text/css">
 	.orders-row {
 	    cursor: pointer;

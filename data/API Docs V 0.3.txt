@@ -1,3 +1,10 @@
+#. Login Merchant
+http://182.18.157.79/medv/api/merch/w/merchLogin
+{
+	 "userName":"Abc",
+	 "pwd":"abc"
+}
+
 1.
 View Merchant Profile 
 HttpGet

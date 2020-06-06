@@ -1,6 +1,7 @@
 const baseUrl = 'http://medv.in/';
 
 // ---------------merchant---------------
+export const loginApi = baseUrl+'medv/api/merch/w/merchLogin';
 export const profileApi = baseUrl+'medv/api/merch/profile';
 export const openOrderApi = baseUrl+'medv/api/order/getOpenOrder';
 export const viewOrderApi = baseUrl+'medv/api/order/ordById';

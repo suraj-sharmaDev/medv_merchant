@@ -1,5 +1,18 @@
-import {profileApi, openOrderApi, viewOrderApi, appConfigApi, getQuotedOrdersApi, updateInvoiceApi, getPrescriptionApi,
-getConfirmedOrdersApi, getDispatchedOrdersApi} from '../data/constants.js?ver=3';
+import {loginApi, profileApi, openOrderApi, viewOrderApi, appConfigApi, getQuotedOrdersApi, updateInvoiceApi, getPrescriptionApi,
+getConfirmedOrdersApi, getDispatchedOrdersApi} from '../data/constants.js?ver=4';
+
+export const login = async(data) => {
+	var url = loginApi;
+	const response = await fetch(url,{
+		method : 'POST',
+		headers : {
+			'Content-Type': 'application/json'
+		},
+		body : JSON.stringify(data)
+	});
+	const result = response.json();
+	return result;
+}
 
 export const viewProfile = async(merchId) => {
 	var url = `${profileApi}?merchId=${merchId}`;

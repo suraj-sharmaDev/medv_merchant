@@ -8,11 +8,11 @@
 		$orderUrl = 'http://medv.in/medv/api/order/ordById?id='.$orderId;
 		$curlOrder = new Curl_helper($orderUrl);
 		$apiOrder = $curlOrder->exec();
-
+		//second curl to get app config
 		$configUrl = 'http://medv.in/medv/api/app/Config?stateId=1';
 		$curlConfig = new Curl_helper($configUrl);
 		$apiConfig = $curlConfig->exec();
-
+		//third tp get list of prescription images
 		$presUrl = 'http://medv.in/medv/api/getprescriptionList?OrderId='.$orderId;
 		$curlPres = new Curl_helper($presUrl);
 		$apiPres = $curlPres->exec();
@@ -22,10 +22,15 @@
 		}else{
 			$config = json_decode($apiConfig, true); 
 			$prescription = json_decode($apiPres, true);
-			$data = json_decode($apiOrder, true)['liOrdDtls'];
+			$orderDetails = json_decode($apiOrder, true);
+			$geoCords = array(
+				"lat" => $orderDetails['GEOlat'],
+				"lng" => $orderDetails['GEOlng']
+			);
+			$medicines = $orderDetails['liOrdDtls'];
 
 ?>
-<?php include('_includes/header.html'); ?>
+<?php include('_includes/header.php'); ?>
 <link rel="stylesheet" href="assets/css/jquery.fancybox.min.css" type="text/css" media="screen" />
 	<style type="text/css">
 	.imageList {
@@ -35,6 +40,10 @@
 		height : 10%;
 		width : 10%;
 	}
+	#map {
+		height: 300px;
+		width: 100%;
+	}
 	</style>
 </head>
 <body>
@@ -43,7 +52,10 @@
 		<!-- contains the order info -->
 		<div class="text-center">
             <h4>Order Id <?php echo $orderId; ?></h4>
-        </div>		
+        </div>
+        <!-- display map here -->
+        <div id="map"></div> 
+       	<!-- prescription images   -->
 		<form action="">
 			<?php 
 				if(sizeof($prescription)>0){
@@ -58,13 +70,14 @@
 					echo "<br><br>";
 				} //end of if
 			?>
+			<!-- requested medicines -->
 			<h5>Requested Medicines</h5><br>
 			<input type="hidden" id="appConfig" value='<?php echo $apiConfig;?>' />
 			<input type="hidden" name="orderId" id="orderId" value="<?php echo $orderId; ?>" />			
 			<?php
 				//iterate over the medicines got from api above
-			 if(sizeof($data) > 0){
-				foreach ($data as $key => $value) {
+			 if(sizeof($medicines) > 0){
+				foreach ($medicines as $key => $value) {
 			?>
 			<div class="form-group medicines">
 				<input type="hidden" class="OrderDtls_Id" value="<?php echo $value['OrderDtls_Id']; ?>" />
@@ -121,6 +134,10 @@
 		</form>
 	</div>
 </body>
+<script>
+	customerCoords = <?php echo(json_encode($geoCords));?>;
+</script>
+<script src="assets/js/maps.js"></script>
 <script type="module" src="./scripts/quoteOrder.js?v=<?php echo(rand(10,100)); ?>"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" crossorigin="anonymous"></script>

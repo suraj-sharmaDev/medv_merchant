@@ -1,4 +1,4 @@
-<?php include('_includes/header.html'); ?>
+<?php include('_includes/header.php'); ?>
 <link rel="stylesheet" href="assets/css/jquery.fancybox.min.css" type="text/css" media="screen" />
 	<style type="text/css">
 	.orders-row {
