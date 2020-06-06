@@ -11,11 +11,23 @@
 	    <label for="inputPassword">Password</label>
 	    <input type="password" class="form-control" name="password" id="inputPassword" placeholder="Password">
 	   </div>
-	   <button type="button" class="btn btn-primary" onclick="validator(event)">Submit</button>
+	   <button type="button" class="btn btn-primary" onclick="validator()">Submit</button>
 	  </form>
 	</div>	
 </body>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" crossorigin="anonymous"></script>
 <script type="module" src="./scripts/index.js?v=<?php echo(rand(10,100)); ?>"></script>
+<script>
+	document.getElementById("inputUserName").addEventListener("keyup", function(event){
+		if(event.keyCode==13){
+			validator();
+		}
+	});	
+	document.getElementById("inputPassword").addEventListener("keyup", function(event){
+		if(event.keyCode==13){
+			validator();
+		}
+	});		
+</script>
 </html>

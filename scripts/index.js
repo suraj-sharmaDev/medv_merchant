@@ -11,7 +11,7 @@ function initializer() {
     }
 }
 
-window.validator = function (event) {
+window.validator = function () {
     var form = document.forms.merchantForm;
     formData = new FormData(form);
     userName = formData.get('username');
