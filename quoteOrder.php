@@ -139,7 +139,7 @@
 <script>
 	customerCoords = <?php echo(json_encode($geoCords));?>;
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBLrslNf2R4vS-nbA2SVqPunOnlG6jsvvo" async defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBLrslNf2R4vS-nbA2SVqPunOnlG6jsvvo"></script>
 <script src="./scripts/mapInit.js?v=1"></script>
 <script type="module" src="./scripts/quoteOrder.js?v=<?php echo(rand(10,100)); ?>"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous"></script>
